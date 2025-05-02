@@ -29,7 +29,8 @@ class ViewController: UIViewController {
         button.setTitle("Criar um nova conta.", for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
         button.backgroundColor = UIColor.white
-        button.layer.cornerRadius = 10
+//        button.layer.cornerRadius = 10
+        button.addTarget(self, action: #selector(handleButtonAction), for: .touchUpInside)
         return button
     }()
     
@@ -38,7 +39,11 @@ class ViewController: UIViewController {
         view.backgroundColor = .systemBackground
         configElementsView()
     }
-
+    
+    @objc func handleButtonAction() {
+        presentPersonalizedAlert(title: "Aviso", msg: "Deseja realmente criar uma nova conta?")
+    }
+    
     func configElementsView() {
         
         view.addSubview(button)
