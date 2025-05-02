@@ -9,12 +9,28 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    lazy var titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Hello World!"
-        label.font = UIFont.systemFont(ofSize: 20, weight: .light)
+        label.text = "Cadastra-se!"
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 22, weight: .light)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
+    }()
+    
+    private lazy var passwordTextField: UITextField = {
+        let textField = UITextField()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    
+    lazy var  button: UIButton = {
+        let  button = UIButton()
+        button.setTitle("Criar um nova conta.", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.backgroundColor = UIColor.white
+        button.layer.cornerRadius = 10
+        return button
     }()
     
     override func viewDidLoad() {
@@ -24,11 +40,28 @@ class ViewController: UIViewController {
     }
 
     func configElementsView() {
+        
+        view.addSubview(button)
         view.addSubview(titleLabel)
         
-        titleLabel.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor, constant: -150).isActive = true
+        // MARK: Constraints
+        
+        // Title label
+        titleLabel.bottomAnchor.constraint(equalTo: button.topAnchor, constant: 0).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 20).isActive = true
+        titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let safeArea = view.safeAreaInsets.bottom
+        let width: CGFloat = view.frame.width - 40
+        let height: CGFloat = 50
+        let xPosition = view.frame.width / 2 - width / 2
+        let yPosition = view.frame.height - height - safeArea
+        
+        button.frame = CGRect(x: xPosition, y: yPosition, width: width, height: height)
     }
 
 }
